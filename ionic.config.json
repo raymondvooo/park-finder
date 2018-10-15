@@ -1,0 +1,7 @@
+{
+  "name": "places-of-interest",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
