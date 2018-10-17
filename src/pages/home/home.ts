@@ -15,6 +15,7 @@ declare var google;
 
       map: any = {};
       infowindow: any = {};
+      list: Array<any> = [];
     
    
     constructor(public navCtrl: NavController, public geolocation: Geolocation,  public mapProvider: MapProvider) {
@@ -32,7 +33,7 @@ declare var google;
            
                 let mapOptions = {
                   center: myLocation,
-                  zoom: 15,
+                  zoom: 14,
                   mapTypeId: google.maps.MapTypeId.ROADMAP
                 }
            
@@ -44,15 +45,13 @@ declare var google;
                     map: this.map
                   });
 
-                
-         
 
 
             this.infowindow = new google.maps.InfoWindow();
             var service = new google.maps.places.PlacesService(this.map);
             service.nearbySearch({
                 location: myLocation,
-                radius: 5000,
+                radius: 3000,
                 type: ['store']
             }, (result, status) => this.callback(result, status, this));
            
@@ -62,6 +61,7 @@ declare var google;
 
 
         }, 1000);
+        
     }
 
     createMarker(place, that) {
@@ -70,6 +70,10 @@ declare var google;
           map: that.map,
           position: place.geometry.location
         });
+        this.list.push(place);
+        console.log(this.list);
+       
+
 
         google.maps.event.addListener(marker, 'click', function() {
           that.infowindow.setContent(place.name);
@@ -85,6 +89,8 @@ declare var google;
             for (var i = 0; i < results.length; i++) {
             that.createMarker(results[i], that);
             }
+            this.mapProvider.list = this.list;
+            console.log(this.mapProvider.list);
         }
     }
     

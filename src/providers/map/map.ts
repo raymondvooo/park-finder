@@ -7,12 +7,18 @@ declare var google;
 
 @Injectable()
 export class MapProvider {
+  list: Array<any> = [];
+
 
   @ViewChild('map') mapElement: ElementRef;
-  map: any;
+  
  
   constructor(public http: HttpClient, public geolocation: Geolocation) {
   }
+
+ 
+
+
 
  
  
