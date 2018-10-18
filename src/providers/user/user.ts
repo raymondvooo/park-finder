@@ -3,8 +3,9 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class UserProvider {
-  url: string = "http://localhost:3000/api/appUser/";
+  url: string = "http://localhost:3000/api/AppUsers/";
   returnUrl: string = "home";
+  userID: string;
  
   constructor( private http : HttpClient) { }
   
