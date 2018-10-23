@@ -1,4 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
+<edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
+   <string>We use your location for full functionality of certain app features.</string>
+</edit-config>
 <widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>places-of-interest</name>
     <description>An awesome Ionic/Cordova app.</description>

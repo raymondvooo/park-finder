@@ -9,7 +9,7 @@
 
 <ion-content>
   <ion-list>
-    <button ion-item *ngFor="let place of mapProvider.list" (click)="itemTapped($event, item)">
+    <button ion-item *ngFor="let place of mapProvider.list" (click)="itemTapped($event, place)">
       <ion-icon name="pin" item-start></ion-icon>
       {{place.name}}
       <div class="item-note" item-end>
