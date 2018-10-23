@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage,NavController, NavParams } from 'ionic-angular';
 import { MapProvider } from '../../providers/map/map';
 import { HomePage } from '../home/home';
+import { UserProvider } from '../../providers/user/user';
 
 @Component({
   selector: 'page-list',
@@ -11,9 +12,16 @@ export class ListPage {
   selectedItem: any;
   icons: string[];
   items: Array<{title: string, note: string, icon: string}>;
+  favorite: any = {
+    place_id: "",
+    name: ""
+  };
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public mapProvider: MapProvider) {
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams,
+    public mapProvider: MapProvider,
+    public user: UserProvider) {
     // If we navigated to this page, we will have an item available as a nav param
     this.selectedItem = navParams.get('item');
 
@@ -24,6 +32,30 @@ export class ListPage {
     this.mapProvider.coordinates = item.geometry.location;
     this.mapProvider.locationFromList = true;
     this.navCtrl.setRoot(HomePage);
+  }
+
+  saveItem(item, event) {
+    event.stopPropagation();
+    let existingFavorite: boolean = false;
+    this.favorite.place_id = item.place_id
+    this.favorite.name = item.name
+
+    for (var i = 0; i < this.user.faveList.length; i++) {
+      if (this.favorite.name === this.user.faveList[i].name) {
+        existingFavorite = true;
+      }
+    }
+    if (existingFavorite === false) {
+      console.log("right beforre" + item)
+    this.user.savePlace(this.favorite)
+    .subscribe ( (data: any) => {
+      console.log("place data: ", data)
+      this.user.faveList.push(data)
+    })
+    }
+    else {
+      console.log("Place already in favorites!")
+    }
   }
 
 }

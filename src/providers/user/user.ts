@@ -6,8 +6,28 @@ export class UserProvider {
   url: string = "http://localhost:3000/api/AppUsers/";
   returnUrl: string = "home";
   userID: string;
+  faveList: Array<any> = [];
  
-  constructor( private http : HttpClient) { }
+  constructor( private http : HttpClient) { 
+    let existingFavorite = false;
+    this.getFavorites()
+    .subscribe ( (data: any) => {
+      for (var prop in data) {
+      if (data.hasOwnProperty(prop)) {
+        for (var i = 0; i < this.faveList.length; i++) {
+          if (data[prop].name === this.faveList[i].name) {
+            existingFavorite = true;
+          }
+        }
+        if (existingFavorite === false) {
+          this.faveList.push(data[prop]);
+          console.log(this.faveList);
+
+        }
+        }
+    }
+  });
+  }
   
   register(user) {
     return this.http.post(this.url, user) 
@@ -30,10 +50,10 @@ export class UserProvider {
     return this.http.get( this.url + id + "/?access_token=" + token, {} )
   }
   
-  saveStock(stock) {
+  savePlace(place) {
     let id = window.sessionStorage.getItem('userId')
     let token = window.sessionStorage.getItem( 'token');
-    return this.http.post( this.url + id + "/favorites?access_token=" + token, stock )
+    return this.http.post( this.url + id + "/favorites?access_token=" + token, place )
   }
   
   getFavorites() {

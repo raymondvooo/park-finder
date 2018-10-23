@@ -30,7 +30,7 @@
       "model": "favorite",
       "foreignKey": "userId"
     }
-  }, 
+  },
   "acls": [
     {
       "accessType": "*",
@@ -39,7 +39,5 @@
       "permission": "ALLOW"
     }
   ],
-    "methods": {}
+  "methods": {}
 }
-
-

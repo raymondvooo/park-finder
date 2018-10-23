@@ -33,7 +33,27 @@ export class LoginPage {
   }
 
   ionViewDidLoad() {
-  }
+  //   this.userProvider.getFavorites()
+  //   .subscribe ( (data: any) => {
+  //     for (var prop in data) {
+  //     if (data.hasOwnProperty(prop)) {
+  //       let existingFavorite = false;
+
+  //       for (var i = 0; i < this.userProvider.faveList.length; i++) {
+  //         if (data[i].name === this.user.faveList[i].name) {
+  //           existingFavorite = true;
+  //         }
+  //       }
+  //       if (existingFavorite === false) {
+  //         this.userProvider.faveList.push(data[prop]);
+  //         console.log(this.userProvider.faveList);
+
+  //       }
+  //       }
+  //   }
+  // });
+}
+
 
   onLogin(){
     console.log(this.user);
