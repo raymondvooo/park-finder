@@ -92,18 +92,16 @@ export class LoginPage {
         position: "top"
       });
       loginToast.present(); 
-    }
-    // ,
-    // err =>{
-    //   let loginToast = this.toast.create({
-    //     message: "Invalid User Credentials",
-    //     duration: 3000,
-    //     position: "top"
-    //   });
-    //   loginToast.present();
-    //   this.loginS  = false;
-    // }
-  )
+    },
+    err =>{
+      let loginToast = this.toast.create({
+        message: "Invalid User Credentials",
+        duration: 3000,
+        position: "top"
+      });
+      loginToast.present();
+      this.loginS  = false;
+    })
     this.userID = window.sessionStorage.getItem('userId');
     this.login = true;
  
