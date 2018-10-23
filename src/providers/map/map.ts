@@ -25,22 +25,7 @@ export class MapProvider {
     public http: HttpClient, 
     public geolocation: Geolocation,) {
       console.log("service start")
-    // this.geolocation.getCurrentPosition().then( (position) => {
-      // console.log("position", position)
-      // new google.maps.LatLng( position.coords.latitude, position.coords.longitude);
-      // this.coordinates = {
-      //   lat: position.coords.latitude,
-      //   lng: position.coords.longitude
-      // }
-      // this.startPosition = this.coordinates;
-      // console.log("latitude = " + this.coordinates.lat)
-    // });
-    
-    // this.coordinates = {
-    //   lat: -33,
-    //   lng: 33
-    // }
-    // this.startPosition = this.coordinates;
+  
   }
   getMyLocation() {
     
@@ -97,15 +82,15 @@ export class MapProvider {
   }
 
   createMarker(place, that) {
-    var placeLoc = place.geometry.location;
     var marker = new google.maps.Marker({
       map: that.map,
-      position: place.geometry.location
+      position: place.geometry.location,
+      content: place.name + place.id,
     });
     this.list.push(place);
 
     google.maps.event.addListener(marker, 'click', function () {
-      that.infowindow.setContent(place.name);
+      that.infowindow.setContent("<div>"+place.name+"</div>" + "<div>"+place.vicinity+"</div>" + '<img width="300" src="' + place.photos[0].getUrl() + '"/>');
       that.infowindow.open(that.map, marker);
       console.log(place)
     });
@@ -121,6 +106,7 @@ export class MapProvider {
       this.list = this.list;
       console.log(this.list);
     }
+    
   }
 }
 

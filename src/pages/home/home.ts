@@ -34,57 +34,13 @@ declare var google;
 
     ionViewDidLoad(){
       this.load.present();
-      this.mapProvider.getMyLocation().then( (x) => {
+      this.mapProvider.getMyLocation().then( x => {
         if (x) {
           this.load.dismiss();
-          this.mapProvider.createMap();          
-        }
-      })
-    }
-
-     
-    
-      
-    // initMap() {
-    //     setTimeout(() => {   
-            
-    //         this.geolocation.getCurrentPosition().then((position) => {
- 
-    //             let myLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-           
-    //             let mapOptions = {
-    //               center: myLocation,
-    //               zoom: 14,
-    //               mapTypeId: google.maps.MapTypeId.ROADMAP
-    //             }
-           
-    //             this.map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
-    //             new google.maps.Marker({
-    //                 position: myLocation,
-    //                 icon: '  http://maps.google.com/mapfiles/ms/icons/arrow.png',
-    //                 map: this.map
-    //               });
-
-
-
-    //         this.infowindow = new google.maps.InfoWindow();
-    //         var service = new google.maps.places.PlacesService(this.map);
-    //         service.nearbySearch({
-    //             location: myLocation,
-    //             radius: 3000,
-    //             type: ['store']
-    //         }, (result, status) => this.callback(result, status, this));
-           
-    //           }, (err) => {
-    //             console.log(err);
-    //           });
-
-
-    //     }, 1000);
+          this.mapProvider.createMap();   
+        }       
         
-    // }
+      })
 
-  
-
+    }
 }

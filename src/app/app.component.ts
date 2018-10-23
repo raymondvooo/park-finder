@@ -23,8 +23,8 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage },
+      { title: 'Map', component: HomePage },
+      { title: 'Parks', component: ListPage },
       { title: "Account", component: LoginPage},
     ];
 
@@ -40,8 +40,8 @@ export class MyApp {
   }
 
   openPage(page) {
-    if ( this.nav.getActive().component.name === page.component)
-    console.log("already on home")
+    if ( this.nav.getActive().component === page.component)
+    console.log("already on page")
   else {
     this.nav.setRoot(page.component);
 
