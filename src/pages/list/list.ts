@@ -30,10 +30,8 @@ export class ListPage {
 
   itemTapped(event, item) {
     this.mapProvider.coordinates = item.geometry.location;
+    this.mapProvider.locationFromList = true;
     this.navCtrl.setRoot(HomePage);
-    // , {
-    //   item: item
-    // });
   }
 
 }

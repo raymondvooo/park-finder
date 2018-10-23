@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
+import { MapProvider } from '../providers/map/map';
 
 @Component({
   templateUrl: 'app.html'
@@ -13,18 +14,18 @@ import { LoginPage } from '../pages/login/login';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any = LoginPage;
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public map: MapProvider) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: HomePage },
       { title: 'List', component: ListPage },
-      { title: "Login", component: LoginPage},
+      { title: "Account", component: LoginPage},
     ];
 
   }
@@ -39,7 +40,7 @@ export class MyApp {
   }
 
   openPage(page) {
-    if ( this.nav.getActive().component.name === "HomePage" && page.component === HomePage )
+    if ( this.nav.getActive().component.name === page.component)
     console.log("already on home")
   else {
     this.nav.setRoot(page.component);

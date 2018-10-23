@@ -12,33 +12,61 @@ export class MapProvider {
   list: Array<any> = [];
   coordinates: any = {};
   startPosition: any = {};
-
-
-
   map: any = {};
   infowindow: any = {};
-  load: any = this.loadCtrl.create({
-    content: "Loading Map",
-    duration: 700
-  });
+  locationFromList: boolean = false;
+  
 
 
   @ViewChild('map') mapElement: ElementRef;
 
 
-  constructor(public http: HttpClient, public geolocation: Geolocation, public loadCtrl: LoadingController) {
-    this.geolocation.getCurrentPosition().then((position) => {
-      this.coordinates = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+  constructor( 
+    public http: HttpClient, 
+    public geolocation: Geolocation,) {
+      console.log("service start")
+    // this.geolocation.getCurrentPosition().then( (position) => {
+      // console.log("position", position)
+      // new google.maps.LatLng( position.coords.latitude, position.coords.longitude);
+      // this.coordinates = {
+      //   lat: position.coords.latitude,
+      //   lng: position.coords.longitude
+      // }
+      // this.startPosition = this.coordinates;
+      // console.log("latitude = " + this.coordinates.lat)
+    // });
+    
+    // this.coordinates = {
+    //   lat: -33,
+    //   lng: 33
+    // }
+    // this.startPosition = this.coordinates;
+  }
+  getMyLocation() {
+    
+    return new Promise( (resolve) => {
+      if (this.locationFromList === false) {
+    this.geolocation.getCurrentPosition().then( (position) => {
+      new google.maps.LatLng( position.coords.latitude, position.coords.longitude);
+      this.coordinates = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      }
       this.startPosition = this.coordinates;
+      console.log("latitude = " + this.coordinates.lat)
+      resolve(true);
     });
+  } else {
+    resolve(true);
+  }
+  })
 
   }
 
-  createMap() {
-    setTimeout(_ => {
-
+   createMap() {
+     this.list = [];
       let mapOptions = {
-        center: this.coordinates,
+        center:  this.coordinates,
         zoom: 15,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       }
@@ -65,8 +93,7 @@ export class MapProvider {
         radius: 7000,
         type: ['park']
       }, (result, status) => this.callback(result, status, this));
-
-    }, 500);
+      this.locationFromList = false;
   }
 
   createMarker(place, that) {
@@ -76,7 +103,6 @@ export class MapProvider {
       position: place.geometry.location
     });
     this.list.push(place);
-    console.log(this.list);
 
     google.maps.event.addListener(marker, 'click', function () {
       that.infowindow.setContent(place.name);

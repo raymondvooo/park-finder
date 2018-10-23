@@ -3,14 +3,18 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>
+    <ion-title *ngIf="showLog === true">
       Login
     </ion-title>
+    
+    <ion-title *ngIf="showReg === true">
+        Register
+      </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
- <ion-list *ngIf="userID === null && login === true">
+ <ion-list *ngIf="userID === null && showLog === true">
 
   <ion-item>
     <ion-input type="text" placeholder="Email" [(ngModel)]="user.email"></ion-input>
@@ -21,10 +25,15 @@
   </ion-item>
 
   <button ion-button (click)="onLogin()">Login</button>
-  <button ion-button (click)="login = false">Create an Account</button>
-</ion-list>
+  <button ion-button (click)="showReg = true; showLog = false">Create an Account</button>
 
-<ion-list *ngIf="userID != null || login === false">
+</ion-list>
+<button *ngIf="userID != null && showLog === true" ion-button (click)="onLogout()">Logout</button>
+<button *ngIf="userID != null && showLog === true" ion-button (click)="showReg = true; showLog = false">Create an Account</button>
+
+
+
+<ion-list *ngIf="showReg === true">
 
     <ion-item>
         <ion-input type="text" placeholder="First Name" [(ngModel)]="user.firstName"></ion-input>
@@ -42,8 +51,9 @@
       <ion-input type="password" placeholder="Password" [(ngModel)]="user.password"></ion-input>
     </ion-item>
   
-    <button ion-button (click)="onRegister()">Create</button>
-    <button ion-button (click)="onLogout()">Logout</button>
+    <button ion-button (click)="onRegister()">Register</button>
+    <button ion-button (click)="showLog = true; showReg = false">Back to Login</button>
+
   </ion-list>
   
 

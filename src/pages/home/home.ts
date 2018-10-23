@@ -20,20 +20,27 @@ declare var google;
       list: Array<any> = [];
       load: any = this.loadCtrl.create({
         content: "Loading Map",
-        duration: 700
       });
     
    
-    constructor(public navCtrl: NavController, public geolocation: Geolocation,  public mapProvider: MapProvider, public loadCtrl: LoadingController) {
-        this.load.present();
-        this.load.onDidDismiss(this.mapProvider.createMap());
-    }
+    constructor(
+      public navCtrl: NavController, 
+      public geolocation: Geolocation,  
+      public mapProvider: MapProvider, 
+      public loadCtrl: LoadingController
+    ) {}
 
 
 
     ionViewDidLoad(){
-
-      }
+      this.load.present();
+      this.mapProvider.getMyLocation().then( (x) => {
+        if (x) {
+          this.load.dismiss();
+          this.mapProvider.createMap();          
+        }
+      })
+    }
 
      
     
