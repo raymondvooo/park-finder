@@ -11,7 +11,7 @@ import { AlertController } from 'ionic-angular';
   templateUrl: 'favorites.html',
 })
 export class FavoritesPage {
-  
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public alert: AlertController,
@@ -20,12 +20,12 @@ export class FavoritesPage {
   }
 
   /**http request to get favorite places of user and subscribes it to a list*/
-  ionViewDidLoad() {  
+  ionViewDidLoad() {
     this.user.getFavorites()
-      .subscribe ( (data: any) => {
-          this.user.faveList = data;
-            console.log(this.user.faveList);
-    });
+      .subscribe((data: any) => {
+        this.user.faveList = data;
+        console.log(this.user.faveList);
+      });
   }
 
   /**if item is tapped, then reloads map and centers it on the items location*/
@@ -43,8 +43,8 @@ export class FavoritesPage {
 
     //deletes item from database
     this.user.deletePlace(item)
-    .subscribe ( (data: any) => {
-    });
+      .subscribe((data: any) => {
+      });
 
     //creates alert and presents
     let alertSucc = this.alert.create({
@@ -55,11 +55,8 @@ export class FavoritesPage {
 
     //refreshes favorites list
     this.user.getFavorites()
-    .subscribe ( (data: any) => {
+      .subscribe((data: any) => {
         this.user.faveList = data;
-  });
+      });
   }
-
-
-
 }

@@ -45,7 +45,6 @@ export class UserProvider {
 
   deletePlace(place) {
     return this.http.delete('http://localhost:3000/api/favorites/' + place.id, place)
-
   }
 
   getFavorites() {

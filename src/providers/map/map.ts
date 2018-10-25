@@ -79,7 +79,7 @@ export class MapProvider {
     console.log(current.position)
     //if item is selected from list, creates a marker in case there is none
     if (this.locationFromList === true) {
-    this.createNew(this.favoriteItem, this)
+      this.createNew(this.favoriteItem, this)
     }
 
     this.infowindow = new google.maps.InfoWindow();
@@ -100,7 +100,7 @@ export class MapProvider {
       position: place.geometry.location,
       content: place.name + place.id,
     });
-    
+
     //creates the info window for marker
     google.maps.event.addListener(marker, 'click', function () {
       that.infowindow.setContent("<div><strong>" + place.name + "</strong></div>" + "<div>" + place.vicinity + "</div>" +
@@ -118,14 +118,12 @@ export class MapProvider {
 
     //creates info window
     google.maps.event.addListener(marker, 'click', function () {
-      if(place.photos != null) {
-      that.infowindow.setContent("<div><strong>" + place.name + "</strong></div>" + "<div>" + place.vicinity + "</div>" +
-        '<img width="350px" src="' + place.photos + '"/>');
-      that.infowindow.open(that.map, marker);
+      if (place.photos != null) {
+        that.infowindow.setContent("<div><strong>" + place.name + "</strong></div>" + "<div>" + place.vicinity + "</div>" +
+          '<img width="350px" src="' + place.photos + '"/>');
+        that.infowindow.open(that.map, marker);
       }
     });
-    
-    
   }
 
 
@@ -140,10 +138,7 @@ export class MapProvider {
       this.list = this.list;
       console.log(this.list);
     }
-
   }
-
-
 }
 
 
