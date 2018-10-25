@@ -3,6 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
+
     <ion-title *ngIf="showLog === true">
       Login
     </ion-title>
@@ -10,10 +11,12 @@
     <ion-title *ngIf="showReg === true">
         Register
       </ion-title>
+
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
+  <!-- Displays login page if no user is logged in -->
  <ion-list *ngIf="userProvider.userID === null && showLog === true">
 
   <ion-item>
@@ -28,11 +31,11 @@
   <button ion-button (click)="showReg = true; showLog = false">Create an Account</button>
 
 </ion-list>
+<!-- Displays if user is logged in -->
 <button *ngIf="userProvider.userID != null && showLog === true" ion-button (click)="onLogout()">Logout</button>
 <button *ngIf="userProvider.userID != null && showLog === true" ion-button (click)="showReg = true; showLog = false">Create an Account</button>
 
-
-
+<!-- Displays register information -->
 <ion-list *ngIf="showReg === true">
 
     <ion-item>
@@ -55,6 +58,4 @@
     <button ion-button (click)="showLog = true; showReg = false">Back to Login</button>
 
   </ion-list>
-  
-
 </ion-content>

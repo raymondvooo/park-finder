@@ -7,10 +7,10 @@
     </ion-navbar>
   </ion-header>
   
-  <ion-content *ngIf = "loaded === true" >
+  <ion-content>
    
     <ion-list>
-  
+  <!-- creates a item list for favorites -->
         <button ion-item *ngFor="let place of user.faveList" (click)="itemTapped($event, place)">
             <ion-icon name="pin" item-start></ion-icon>
             {{place.name}}
@@ -19,13 +19,11 @@
         </button>
     
     </ion-list>
-  
-    
-  
   </ion-content>
-  <!-- <ion-content *ngIf = "user.faveList.length === 0" >
-   
-      <ion-list>
+
+  <!-- if there are no favorites -->
+ <ion-content *ngIf = "user.faveList.length === 0" >
+         <ion-list>
         
           <div class= item-start>
             <br>
@@ -34,8 +32,5 @@
             </div>
       
       </ion-list>
-    
-      
-    
     </ion-content> -->
   

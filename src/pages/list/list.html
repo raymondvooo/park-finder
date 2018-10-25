@@ -7,10 +7,9 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content *ngIf = "mapProvider.list.length > 0" >
- 
+<ion-content>
   <ion-list>
-
+<!-- displays list of nearby parks -->
       <ion-item *ngFor="let place of mapProvider.list" (click)="itemTapped($event, place)">
           <ion-icon name="pin" item-start></ion-icon>
           {{place.name}}
@@ -18,12 +17,10 @@
         </ion-item>
           
   </ion-list>
-
-  
-
 </ion-content>
+
+<!-- displays if no nearby locations -->
 <ion-content *ngIf = "mapProvider.list.length === 0" >
- 
     <ion-list>
       
         <div class= item-start>
@@ -33,7 +30,4 @@
           </div>
     
     </ion-list>
-  
-    
-  
   </ion-content>

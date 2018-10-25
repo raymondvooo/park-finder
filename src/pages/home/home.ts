@@ -6,8 +6,6 @@ import { LoadingController } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
 
 
-declare var google;
-
 @Component({
     selector: 'page-home',
     templateUrl: 'home.html'
@@ -18,7 +16,6 @@ declare var google;
 
       map: any = {};
       infowindow: any = {};
-      list: Array<any> = [];
       load: any = this.loadCtrl.create({
         content: "Loading Map",
       });
@@ -32,23 +29,14 @@ declare var google;
       public userProvider: UserProvider
     ) {}
 
-
-
+    /**presents loader when page loads. calls promise from map provider to get location after script loads. once promise is fulfilled, dismisses loader and initializes the map*/
     ionViewDidLoad(){
-      this.userProvider.getFavorites()
-      .subscribe ( (data: any) => {
-          this.userProvider.faveList = data;
-            console.log(this.userProvider.faveList);
-          });
-          
-          
       this.load.present();
       this.mapProvider.getMyLocation().then( x => {
         if (x) {
           this.load.dismiss();
           this.mapProvider.createMap();   
         }       
-        
       })
 
     }

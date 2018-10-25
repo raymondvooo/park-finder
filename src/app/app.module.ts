@@ -8,7 +8,6 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
 import { FavoritesPage } from '../pages/favorites/favorites';
-import { PlacePage } from '../pages/place/place';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -24,7 +23,7 @@ import { UserProvider } from '../providers/user/user';
     ListPage,
     LoginPage,
     FavoritesPage,
-    PlacePage
+    
   ],
   imports: [
     BrowserModule,
@@ -38,7 +37,7 @@ import { UserProvider } from '../providers/user/user';
     ListPage,
     LoginPage,
     FavoritesPage,
-    PlacePage
+    
   ],
   providers: [
     StatusBar,

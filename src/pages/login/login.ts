@@ -4,12 +4,6 @@ import { UserProvider } from '../../providers/user/user';
 import { HomePage } from '../home/home';
 import { ToastController } from 'ionic-angular';
 
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @Component({
   selector: 'page-login',
@@ -17,11 +11,6 @@ import { ToastController } from 'ionic-angular';
 })
 export class LoginPage {
   user: any = {};
-  loginS: boolean = true;
-  login: boolean = true;
-  register: boolean = false;
-  // userID: string = window.sessionStorage.getItem('userId');
-
   showLog: boolean = true;
   showReg: boolean = false;
 
@@ -32,22 +21,13 @@ export class LoginPage {
     public toast: ToastController) {
   }
 
-  ionViewDidLoad() {
-  //   this.userProvider.getFavorites()
-  //   .subscribe ( (data: any) => {
-  //       this.userProvider.faveList = data;
-  //         console.log(this.userProvider.faveList);
-    
-  // });
-}
+  ionViewDidLoad() {  }
 
 
   onLogin(){
-    console.log(this.user);
     this.userProvider.login(this.user)
     .subscribe((res) => {
       console.log(res);
-
       this.userProvider.toHomePage(res)
       this.navCtrl.setRoot(HomePage);
       let loginToast = this.toast.create({
@@ -58,7 +38,6 @@ export class LoginPage {
       loginToast.present();
       console.log("id is :", window.sessionStorage.getItem('userId'))
       this.userProvider.userID = window.sessionStorage.getItem('userId');
-
     },
       err =>{
         let loginToast = this.toast.create({
@@ -67,11 +46,7 @@ export class LoginPage {
           position: "top"
         });
         loginToast.present();
-        this.loginS  = false;
-      })
-      
-     
-      
+      })      
   }
   
   onLogout() {
@@ -86,10 +61,10 @@ export class LoginPage {
         position: "top"
       });
       logoutToast.present();
-      this.login = true;
+      //makes sure favorites list is empty
       this.userProvider.faveList = [];
-
   }
+
     onRegister(){
     console.log(this.user);
     this.userProvider.register(this.user)
@@ -111,11 +86,8 @@ export class LoginPage {
         position: "top"
       });
       loginToast.present();
-      this.loginS  = false;
     })
     this.userProvider.userID = window.sessionStorage.getItem('userId');
-    this.login = true;
- 
   }
 
 

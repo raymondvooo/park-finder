@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, Nav, Platform } from 'ionic-angular';
+import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -16,7 +16,6 @@ import { UserProvider } from '../providers/user/user';
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-
   rootPage: any = HomePage;
 
   pages: Array<{title: string, component: any}>;
@@ -28,13 +27,11 @@ export class MyApp {
     public user: UserProvider) {
     this.initializeApp();
 
-    // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Map', component: HomePage },
-      { title: 'Parks', component: ListPage },
+      { title: 'Nearby Parks', component: ListPage },
       { title: "Favorites", component: FavoritesPage},
       { title: "Account", component: LoginPage},
-
     ];
 
   }
@@ -48,7 +45,7 @@ export class MyApp {
     });
 
   }
-
+/**opens a page. if already on the page, then do nothing */
   openPage(page) {
     if ( this.nav.getActive().component === page.component)
     console.log("already on page")
