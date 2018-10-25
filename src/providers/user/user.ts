@@ -44,8 +44,6 @@ export class UserProvider {
   }
 
   deletePlace(place) {
-    let id = window.sessionStorage.getItem('userId')
-    let token = window.sessionStorage.getItem( 'token');
     return this.http.delete( 'http://localhost:3000/api/favorites/' + place.id, place )
   
   }

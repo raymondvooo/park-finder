@@ -19,7 +19,8 @@ import { AlertController } from 'ionic-angular';
   templateUrl: 'favorites.html',
 })
 export class FavoritesPage {
-
+  loaded: boolean = false;
+  list: Array<any> = [];
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public alert: AlertController,
@@ -28,12 +29,18 @@ export class FavoritesPage {
   }
 
   ionViewDidLoad() {  
+    console.log("initial list: ",this.user.faveList);
+
     this.user.getFavorites()
       .subscribe ( (data: any) => {
           this.user.faveList = data;
             console.log(this.user.faveList);
-      
+            this.list = this.user.faveList;
+            console.log("list: ", this.list)
+            this.loaded = true;
     });
+    this.list = this.user.faveList;
+    
   }
 
   itemTapped(event, item) {
@@ -57,5 +64,7 @@ export class FavoritesPage {
     this.navCtrl.setRoot(this.navCtrl.getActive().component);
 
   }
+
+
 
 }

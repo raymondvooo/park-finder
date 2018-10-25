@@ -41,6 +41,7 @@ declare var google;
             console.log(this.userProvider.faveList);
           });
           
+          
       this.load.present();
       this.mapProvider.getMyLocation().then( x => {
         if (x) {

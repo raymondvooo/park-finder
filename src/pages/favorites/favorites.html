@@ -7,7 +7,7 @@
     </ion-navbar>
   </ion-header>
   
-  <ion-content *ngIf = "user.faveList.length > 0" >
+  <ion-content *ngIf = "loaded === true" >
    
     <ion-list>
   
@@ -23,7 +23,7 @@
     
   
   </ion-content>
-  <ion-content *ngIf = "user.faveList.length === 0" >
+  <!-- <ion-content *ngIf = "user.faveList.length === 0" >
    
       <ion-list>
         
@@ -37,5 +37,5 @@
     
       
     
-    </ion-content>
+    </ion-content> -->
   

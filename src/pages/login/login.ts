@@ -33,12 +33,12 @@ export class LoginPage {
   }
 
   ionViewDidLoad() {
-    this.userProvider.getFavorites()
-    .subscribe ( (data: any) => {
-        this.userProvider.faveList = data;
-          console.log(this.userProvider.faveList);
+  //   this.userProvider.getFavorites()
+  //   .subscribe ( (data: any) => {
+  //       this.userProvider.faveList = data;
+  //         console.log(this.userProvider.faveList);
     
-  });
+  // });
 }
 
 
@@ -52,21 +52,23 @@ export class LoginPage {
       this.navCtrl.setRoot(HomePage);
       let loginToast = this.toast.create({
         message: "Welcome " + this.user.email + "!",
-        duration: 3000,
+        duration: 1500,
         position: "top"
       });
       loginToast.present();
+      console.log("id is :", window.sessionStorage.getItem('userId'))
+      this.userProvider.userID = window.sessionStorage.getItem('userId');
+
     },
       err =>{
         let loginToast = this.toast.create({
           message: "Invalid User Credentials",
-          duration: 3000,
+          duration: 1500,
           position: "top"
         });
         loginToast.present();
         this.loginS  = false;
       })
-      this.userProvider.userID = window.sessionStorage.getItem('userId');
       
      
       
@@ -80,7 +82,7 @@ export class LoginPage {
       this.userProvider.userID = window.sessionStorage.getItem('userId');
       let logoutToast = this.toast.create({
         message: "Logged Out",
-        duration: 3000,
+        duration: 1500,
         position: "top"
       });
       logoutToast.present();
@@ -97,7 +99,7 @@ export class LoginPage {
       this.navCtrl.setRoot(HomePage); 
       let loginToast = this.toast.create({
         message: "Welcome " + this.user.email + "!",
-        duration: 3000,
+        duration: 1500,
         position: "top"
       });
       loginToast.present(); 
@@ -105,7 +107,7 @@ export class LoginPage {
     err =>{
       let loginToast = this.toast.create({
         message: "Invalid User Credentials",
-        duration: 3000,
+        duration: 1500,
         position: "top"
       });
       loginToast.present();
