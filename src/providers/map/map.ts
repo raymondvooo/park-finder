@@ -90,7 +90,8 @@ export class MapProvider {
     this.list.push(place);
 
     google.maps.event.addListener(marker, 'click', function () {
-      that.infowindow.setContent("<div>"+place.name+"</div>" + "<div>"+place.vicinity+"</div>" + '<img width="300" src="' + place.photos[0].getUrl() + '"/>');
+      that.infowindow.setContent("<div><strong>"+place.name+"</strong></div>" + "<div>"+place.vicinity+"</div>" + 
+      '<img width="350px" src="' + place.photos[0].getUrl() + '"/>');
       that.infowindow.open(that.map, marker);
       console.log(place)
     });
@@ -108,6 +109,8 @@ export class MapProvider {
     }
     
   }
+
+  
 }
 
 

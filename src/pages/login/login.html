@@ -14,7 +14,7 @@
 </ion-header>
 
 <ion-content padding>
- <ion-list *ngIf="userID === null && showLog === true">
+ <ion-list *ngIf="userProvider.userID === null && showLog === true">
 
   <ion-item>
     <ion-input type="text" placeholder="Email" [(ngModel)]="user.email"></ion-input>
@@ -28,8 +28,8 @@
   <button ion-button (click)="showReg = true; showLog = false">Create an Account</button>
 
 </ion-list>
-<button *ngIf="userID != null && showLog === true" ion-button (click)="onLogout()">Logout</button>
-<button *ngIf="userID != null && showLog === true" ion-button (click)="showReg = true; showLog = false">Create an Account</button>
+<button *ngIf="userProvider.userID != null && showLog === true" ion-button (click)="onLogout()">Logout</button>
+<button *ngIf="userProvider.userID != null && showLog === true" ion-button (click)="showReg = true; showLog = false">Create an Account</button>
 
 
 

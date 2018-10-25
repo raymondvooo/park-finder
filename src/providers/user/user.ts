@@ -5,28 +5,11 @@ import { HttpClient } from '@angular/common/http';
 export class UserProvider {
   url: string = "http://localhost:3000/api/AppUsers/";
   returnUrl: string = "home";
-  userID: string;
+  userID: string = window.sessionStorage.getItem('userId');
   faveList: Array<any> = [];
  
   constructor( private http : HttpClient) { 
-    let existingFavorite = false;
-    this.getFavorites()
-    .subscribe ( (data: any) => {
-      for (var prop in data) {
-      if (data.hasOwnProperty(prop)) {
-        for (var i = 0; i < this.faveList.length; i++) {
-          if (data[prop].name === this.faveList[i].name) {
-            existingFavorite = true;
-          }
-        }
-        if (existingFavorite === false) {
-          this.faveList.push(data[prop]);
-          console.log(this.faveList);
-
-        }
-        }
-    }
-  });
+   
   }
   
   register(user) {

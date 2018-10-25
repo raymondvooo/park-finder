@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
 import { MapProvider } from '../../providers/map/map';
+import { HomePage } from '../home/home';
 
 
 
@@ -24,12 +25,19 @@ export class FavoritesPage {
     public map: MapProvider) {
   }
 
-  ionViewDidLoad() {
-   
+  ionViewDidLoad() {  
+    this.user.getFavorites()
+      .subscribe ( (data: any) => {
+          this.user.faveList = data;
+            console.log(this.user.faveList);
+      
+    });
   }
 
   itemTapped(event, item) {
-    console.log(item)
+    this.map.coordinates = item.location;
+    this.map.locationFromList = true;
+    this.navCtrl.setRoot(HomePage);
   }
 
 }
