@@ -3,19 +3,37 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>List</ion-title>
+    <ion-title>Nearby Parks</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf = "mapProvider.list.length > 0" >
+ 
   <ion-list>
-    <button ion-item *ngFor="let place of mapProvider.list" (click)="itemTapped($event, place)">
-      <ion-icon name="pin" item-start></ion-icon>
-      {{place.name}}
-      <div class="item-note" item-end>
-        <!-- {{place.icon}} -->
-      </div>
-    </button>
+
+      <ion-item *ngFor="let place of mapProvider.list" (click)="itemTapped($event, place)">
+          <ion-icon name="pin" item-start></ion-icon>
+          {{place.name}}
+          <button *ngIf="user.userID != null"ion-button icon-only clear item-end (click)="saveItem(place, $event)">Favorite<ion-icon name="star"></ion-icon></button>
+        </ion-item>
+          
   </ion-list>
 
+  
+
 </ion-content>
+<ion-content *ngIf = "mapProvider.list.length === 0" >
+ 
+    <ion-list>
+      
+        <div class= item-start>
+          <br>
+            <ion-icon name="pin" item-start></ion-icon>
+            No locations yet. Go to Map to get some places of interest!
+          </div>
+    
+    </ion-list>
+  
+    
+  
+  </ion-content>

@@ -5,9 +5,16 @@ import { HttpClient } from '@angular/common/http';
 export class UserProvider {
   url: string = "http://localhost:3000/api/AppUsers/";
   returnUrl: string = "home";
-  userID: string;
+  userID: string = window.sessionStorage.getItem('userId');
+  faveList: Array<any> = [];
+  favorite: any = {
+    place_id: "",
+    name: "",
+  };
  
-  constructor( private http : HttpClient) { }
+  constructor( private http : HttpClient) { 
+   
+  }
   
   register(user) {
     return this.http.post(this.url, user) 
@@ -30,10 +37,17 @@ export class UserProvider {
     return this.http.get( this.url + id + "/?access_token=" + token, {} )
   }
   
-  saveStock(stock) {
+  savePlace(place) {
     let id = window.sessionStorage.getItem('userId')
     let token = window.sessionStorage.getItem( 'token');
-    return this.http.post( this.url + id + "/favorites?access_token=" + token, stock )
+    return this.http.post( this.url + id + "/favorites?access_token=" + token, place )
+  }
+
+  deletePlace(place) {
+    let id = window.sessionStorage.getItem('userId')
+    let token = window.sessionStorage.getItem( 'token');
+    return this.http.delete( 'http://localhost:3000/api/favorites/' + place.id, place )
+  
   }
   
   getFavorites() {

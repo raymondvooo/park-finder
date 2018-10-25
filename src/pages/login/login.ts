@@ -20,7 +20,7 @@ export class LoginPage {
   loginS: boolean = true;
   login: boolean = true;
   register: boolean = false;
-  userID: string = window.sessionStorage.getItem('userId');
+  // userID: string = window.sessionStorage.getItem('userId');
 
   showLog: boolean = true;
   showReg: boolean = false;
@@ -33,7 +33,14 @@ export class LoginPage {
   }
 
   ionViewDidLoad() {
-  }
+    this.userProvider.getFavorites()
+    .subscribe ( (data: any) => {
+        this.userProvider.faveList = data;
+          console.log(this.userProvider.faveList);
+    
+  });
+}
+
 
   onLogin(){
     console.log(this.user);
@@ -59,8 +66,9 @@ export class LoginPage {
         loginToast.present();
         this.loginS  = false;
       })
-      this.userID = window.sessionStorage.getItem('userId');
-   
+      this.userProvider.userID = window.sessionStorage.getItem('userId');
+      
+     
       
   }
   
@@ -68,9 +76,8 @@ export class LoginPage {
     this.userProvider.logout(this.user)
       .subscribe ( (res) => {
         console.log(res);
-        this.navCtrl.push(LoginPage);
       })
-      this.userID = window.sessionStorage.getItem('userId');
+      this.userProvider.userID = window.sessionStorage.getItem('userId');
       let logoutToast = this.toast.create({
         message: "Logged Out",
         duration: 3000,
@@ -78,6 +85,8 @@ export class LoginPage {
       });
       logoutToast.present();
       this.login = true;
+      this.userProvider.faveList = [];
+
   }
     onRegister(){
     console.log(this.user);
@@ -102,7 +111,7 @@ export class LoginPage {
       loginToast.present();
       this.loginS  = false;
     })
-    this.userID = window.sessionStorage.getItem('userId');
+    this.userProvider.userID = window.sessionStorage.getItem('userId');
     this.login = true;
  
   }
